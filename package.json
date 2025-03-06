@@ -1,8 +1,8 @@
 {
   "name": "cmake-tools",
-  "displayName": "CMake Tools",
+  "displayName": "CMake Tools (Modded)",
   "description": "Extended CMake support in Visual Studio Code",
-  "version": "1.13.0",
+  "version": "1.20.53",
   "publisher": "ms-vscode",
   "repository": {
     "type": "git",
@@ -2030,7 +2030,7 @@
     },
     "configuration": {
       "type": "object",
-      "title": "CMake Tools",
+      "title": "CMake Tools (Modded)",
       "properties": {
         "cmake.autoSelectActiveFolder": {
           "type": "boolean",
