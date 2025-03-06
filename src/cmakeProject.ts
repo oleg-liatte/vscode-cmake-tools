@@ -2165,22 +2165,32 @@ export class CMakeProject {
      * which the compilation is running
      * @param filePath The path to a file to try and compile
      */
-    async tryCompileFile(filePath: string): Promise<vscode.Terminal | null> {
+    async tryCompileFile(filePath: string): Promise<boolean> {
         const configResult = await this.ensureConfigured();
         if (configResult === null || configResult !== 0) {
             // Config failed?
-            return null;
+            return false;
         }
         if (!this.compilationDatabase) {
-            return null;
+            return false;
         }
         const cmd = this.compilationDatabase.get(filePath);
         if (!cmd) {
-            return null;
+            return false;
         }
+
+        if (this.workspaceContext.config.compileFileByCMake) {
+            if (!cmd.output) {
+                log.error(localize('no.output.file', 'No output file specified in compile command'));
+                return false;
+            }
+            await this.build([cmd.output]);
+            return true;
+        }
+
         const drv = await this.getCMakeDriverInstance();
         if (!drv) {
-            return null;
+            return false;
         }
         return drv.runCompileCommand(cmd);
     }

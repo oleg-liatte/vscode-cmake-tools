@@ -1484,9 +1484,9 @@ export class ExtensionManager implements vscode.Disposable {
             file = editor.document.uri.fsPath;
         }
         for (const project of this.projectController.getAllCMakeProjects()) {
-            const term = await project.tryCompileFile(file);
-            if (term) {
-                return term;
+            const r = await project.tryCompileFile(file);
+            if (r) {
+                return r;
             }
         }
         void vscode.window.showErrorMessage(localize('compilation information.not.found', 'Unable to find compilation information for this file'));

@@ -524,7 +524,7 @@ export abstract class CMakeDriver implements vscode.Disposable {
      * Launch the given compilation command in an embedded terminal.
      * @param cmd The compilation command from a compilation database to run
      */
-    async runCompileCommand(cmd: CompileCommand): Promise<vscode.Terminal> {
+    async runCompileCommand(cmd: CompileCommand): Promise<boolean> {
         const env = await this.getCMakeBuildCommandEnvironment();
 
         if (this.useCMakePresets && this._buildPreset && checkBuildOverridesPresent(this.config)) {
@@ -551,7 +551,7 @@ export abstract class CMakeDriver implements vscode.Disposable {
         }
         existing.show();
         existing.sendText(cmd.command + '\r\n');
-        return existing;
+        return true;
     }
 
     /**

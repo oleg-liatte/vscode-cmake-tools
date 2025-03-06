@@ -2096,6 +2096,12 @@
           "description": "%cmake-tools.configuration.cmake.clearOutputBeforeBuild.description%",
           "scope": "resource"
         },
+        "cmake.compileFileByCMake": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run build command to compile the current file. If disabled, the compile command will be used.",
+          "scope": "resource"
+        },
         "cmake.configureSettings": {
           "type": "object",
           "default": {},
